@@ -1,0 +1,72 @@
+{% extends 'jobs/base.html' %}
+
+{% block content %}
+
+
+    <div class="card">
+
+
+        <div class="card-body">
+
+            <i class="fa fa-user-circle-o" aria-hidden="true"></i> &nbsp;
+
+            <strong>   
+
+                {{job.name|upper}}
+    
+            </strong>
+    
+            <hr> 
+
+            <p> <strong> ID: </strong> {{job.id}} </p>
+
+            <p> <strong> Name: </strong> {{job.name}} </p>
+
+            <p> <strong> Salary range: </strong> {{job.salary_range}} </p>
+
+            <p> <strong> Requirements: </strong> {{job.requirements}} </p>
+            <p> <strong> Schooling: </strong> {{job.schooling}} </p>
+
+<!--             
+
+                {% for candidate in job.candidates %}
+
+                    <p> <strong> Candidates: </strong> </p>
+
+                    {{candidate.email}}
+                    {{candidate.experience}}
+                    {{candidate.expected_salary}}
+                    {{candidate.last_education}}
+                {% endfor %}
+         -->
+            
+
+        </div>
+
+
+    </div>
+
+    <br>
+
+    <a href="{% url 'dashboard' %}" class="btn btn-secondary"> Return &nbsp; <i class="fa fa-arrow-left" aria-hidden="true"></i> </a>
+
+    &nbsp;
+    {% if user.type == 1 %}
+
+    &nbsp;
+        <a class="btn btn-info" href="{% url 'view-candidates' job.id %}"> View candidates &nbsp;<i class="fa fa-eye" aria-hidden="true"></i> </a> </td>
+        
+        &nbsp;
+
+        <a href="{% url 'update-record' job.id %}" class="btn btn-info"> Update &nbsp; <i class="fa fa-plus" aria-hidden="true"></i> </a>
+
+        &nbsp;
+
+        <a href="{% url 'delete-record' job.id %}" class="btn btn-danger"> Delete &nbsp;<i class="fa fa-minus-square" aria-hidden="true"></i> </a>
+    
+        {% else %}
+        <a href="{% url 'apply_job' job.id %}" class="btn btn-info"> Aplly &nbsp; <i class="fa fa-plus" aria-hidden="true"></i> </a>
+    {% endif %}
+
+
+{% endblock %}

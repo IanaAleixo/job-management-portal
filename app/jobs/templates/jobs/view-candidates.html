@@ -1,0 +1,49 @@
+{% extends 'jobs/base.html' %}
+
+{% block content %}
+
+{% if job %}
+    {% for candidate in job.candidates %}
+
+        <div class="card">
+
+
+            <div class="card-body">
+
+                <i class="fa fa-user-circle-o" aria-hidden="true"></i> &nbsp;
+
+                <strong>   
+
+                    {{candidate.user.email|upper}}
+        
+                </strong>
+        
+                <hr> 
+
+                <p> <strong> Email: </strong> {{candidate.user.email}} </p>
+
+                <p> <strong> Experience: </strong> {{candidate.experience}} </p>
+
+                <p> <strong> Expected salary: </strong> {{candidate.expected_salary}}</p>
+
+                <p> <strong> Education: </strong> {{candidate.last_education}} </p>
+
+                <p> <strong> Points: </strong> {{candidate.job_compatibility}} </p>      
+
+            </div>
+
+
+        </div>
+    <br>
+    {% endfor %}
+
+{% endif %}
+        
+
+    <br>
+
+    <a href="{% url 'job' job.id %}" class="btn btn-secondary"> Return &nbsp; <i class="fa fa-arrow-left" aria-hidden="true"></i> </a>
+
+    &nbsp;
+
+{% endblock %}

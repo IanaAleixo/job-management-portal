@@ -1,0 +1,29 @@
+{% extends 'jobs/base.html' %}
+
+{% block content %}
+    
+    <body>
+
+        <br>
+        <br>
+
+        <div class="text-center">
+
+            <h3> Job Management Portal ... Management at it's finest! </h3>
+
+            <br>
+
+            <h5> A portal where companies can manager their job opportunities and the candidates can apply! </h5>
+
+            <hr>
+            <br>
+
+            <a class="btn btn-primary" type="button" href="{% url 'register-company' %}"> Register as company &nbsp; <i class="fa fa-user-plus" aria-hidden="true"></i> </a>
+            <a class="btn btn-primary" type="button" href="{% url 'register-candidate' %}"> Register as candidate &nbsp; <i class="fa fa-user-plus" aria-hidden="true"></i> </a>
+
+        </div>
+
+    </body>        
+
+
+{% endblock %}

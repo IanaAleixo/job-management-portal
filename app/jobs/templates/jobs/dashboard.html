@@ -1,0 +1,68 @@
+{% extends 'jobs/base.html' %}
+
+{% block content %}
+
+    <h5> Hello!👋 </h5>
+
+    
+
+    {% if user.type == 1 %}
+        <hr>
+            <a class="btn btn-outline-primary btn-sm" href="{% url 'create-record' %}">
+
+                Create Job &nbsp; <i class="fa fa-plus-circle" aria-hidden="true"></i>
+
+            </a>
+        <hr> 
+    {% endif %}
+
+    <br>
+
+    <table class="table table-hover table-bordered">
+
+        <thead class="table-light">
+
+            <tr>
+
+                <th scope="col"> ID </th>
+                <th scope="col"> Name </th>
+                <th scope="col"> Salary </th>
+                <th scope="col"> Schooling </th>
+                <th scope="col"> Candidates </th>
+                <th scope="col"> View </th>
+
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+        {% if jobs %}
+
+            {% for job in jobs %}
+
+            <tr>
+
+                <td> {{job.id}} </td>
+                <td> {{job.name}} </td>
+                <td> {{job.salary_range}} </td>
+                <td> {{job.schooling}} </td>
+                <td> {{job.count_candidates}} </td>
+
+                <td> <a class="btn btn-success btn-sm" href="{% url 'job' job.id %}"> <i class="fa fa-eye" aria-hidden="true"></i> </a> </td>
+
+            </tr>
+
+            {% endfor %}
+        
+        {% endif %}
+
+
+        </tbody>
+
+
+    </table>
+
+
+{% endblock %}
