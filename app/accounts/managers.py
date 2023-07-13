@@ -1,6 +1,15 @@
 from django.contrib.auth.models import BaseUserManager
 
 class UserManager(BaseUserManager):
+
+    def create(self, **kwargs):
+        if self.type:
+            kwargs.update({"type": self.type})
+        user = super().create(**kwargs)
+        user.set_password(kwargs.get("password"))
+        user.save(using=self._db)
+        return user
+    
     def create_user(self, email, password=None, **kwargs):
         request = None
         if "request" in kwargs:
