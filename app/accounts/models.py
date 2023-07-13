@@ -9,9 +9,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False, help_text=("Designates whether the user can log into this admin site."),)
     is_active = models.BooleanField(default=True,help_text=("Designates whether this user should be treated as active. Unselect this instead of deleting accounts."), verbose_name="Ativo?",)
     type = models.PositiveIntegerField(choices=choices.TYPE_USER, blank=True, default=0, verbose_name="User type", editable=False)
-    expected_salary = models.CharField(max_length=255, blank=True, null=True, verbose_name="Expected salary")
+    expected_salary = models.CharField(max_length=255, choices=choices.SALARY_RANGE,  default=choices.SALARY_RANGE.up_to_1000, null=True, verbose_name="Expected salary")
     experience = models.CharField(max_length=255, blank=True, null=True, verbose_name="Experience")
-    last_education = models.CharField(max_length=255, blank=True, null=True, verbose_name="Last Education")
+    last_education = models.CharField(max_length=255, choices=choices.SCHOOLING, blank=True, null=True, verbose_name="Last Education")
     USERNAME_FIELD = "email"
     
     objects = UserManager()
@@ -51,7 +51,8 @@ class Company(User):
         self.is_staff = True
         self.is_superuser = False
         self.type = 1
-        return super().save(*args, **kwargs)
+        super().save(*args, **kwargs)
+        self.groups.add(1)
 
 class Candidate(User):
     objects = ManagerUser(type=choices.TYPE_USER.candidate)
@@ -67,4 +68,5 @@ class Candidate(User):
             self.is_superuser = False
             self.type = 2
         super().save(*args, **kwargs)
+        self.groups.add(2)
         
